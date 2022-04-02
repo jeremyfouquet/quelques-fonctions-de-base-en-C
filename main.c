@@ -19,14 +19,13 @@ void parcour(const string); // prototype
 void fonctionParcour(string S); // prototype
 void egaux(const string); // prototype
 int fonctionEgaux(string S, char C); // prototype
-//void copieChaine(const string titre); // prototype
-//void fonctionCopieChaine(string Destination, string Source); // prototype
+void copieChaine(const string titre); // prototype
 
 int main(int argc, const char * argv[]) {
     compte("Compte");
     parcour("Parcour");
     egaux("Egaux");
-//    copieChaine("Copie Chaine");
+    copieChaine("Copie Chaine");
     puts("");
     return 0;
 }
@@ -97,21 +96,16 @@ int fonctionEgaux(string S, char C) {
     return 0 ;
 }
 
-//void copieChaine(const string titre) {
-//    printf("\n%s\n", titre);
-//    printf("\n%s\n", "fonction qui copie une chaîne");
-//    puts("");
-//    string S = "Hello Hello";
-//    string SCopie = malloc((sizeof(S)) + 1) ;
-//    fonctionCopieChaine(SCopie, S);
-//    printf("Chaine d'origine : %s\nChaine Copié : %s\n", S, SCopie);
-//    puts("");
-//}
-
-//void fonctionCopieChaine(string Destination, string Source) {
-//    while (* Source) (* Destination) = (* Source) ;
-//    (* Destination) = '\0' ;
-//}
+void copieChaine(const string titre) {
+    printf("\n%s\n", titre);
+    printf("\n%s\n", "fonction qui copie une chaîne");
+    puts("");
+    string S = "Hello Hello";
+    string SCopie = malloc((sizeof(S)) + 1) ;
+    strcpy(SCopie, S);
+    printf("Chaine d'origine : %s\nChaine Copié : %s\n", S, SCopie);
+    puts("");
+}
 
 void usage(const string D) {
     printf("Erreur en provenance de : %s\n", D);
