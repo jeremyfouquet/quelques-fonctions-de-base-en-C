@@ -5,12 +5,25 @@
 //  Created by Jeremy Fouquet on 01/04/2022.
 //
 
+typedef struct Doublet element;
+struct Doublet
+{
+    void * car;
+    struct Doublet * cdr;
+};
+
+typedef element * list;
+
 #include <stdio.h> // puts(), printf()
 #include <stdlib.h> // exit()
 #include <string.h> // strlen()
 
 #define string char *
 
+element * car(element *, void *);
+element * cdr(element *, list);
+list push(list, void *);
+int estVide(list L);
 void usage(const string); // prototype
 void compte(const string); // prototype
 int fonctionCompte1(string S); // prototype
@@ -27,7 +40,9 @@ string strstr(const string Source, const string SousChaine) ;
 void occurence(const string) ; // prototype
 int my_strstrs(const string S1, const string S2) ;
 void positionCaractere(const string) ; // prototype
-string my_strchr(char C, string S) ;
+string my_strchr(char C, string S) ;  // prototype
+void fonctionsDesListes(const string); // prototype
+void afficherListe(list, string); // prototype
 
 
 int main(int argc, const char * argv[]) {
@@ -36,9 +51,10 @@ int main(int argc, const char * argv[]) {
     egaux("Egaux");
     copieChaine("Copie Chaine");
     compareChaines("Compare 2 chaines"); // prototype
-    contient("Trouve une chaine dans une autre"); // prototype
+    contient("Détecter une chaîne dans une autre"); // prototype
     occurence("Nombre d'occurence de chaine"); // prototype
-    positionCaractere("Position d’un caractère dans une chaîne"); // prototype
+    positionCaractere("Position d’un caractère dans une chaîne");
+    fonctionsDesListes("Plusieurs fonctions associées aux listes");
     puts("");
     return 0;
 }
@@ -208,7 +224,62 @@ string my_strchr(char C, string S) {
     else return S;
 };
 
+void fonctionsDesListes(const string titre) {
+    printf("\n%s\n", titre);
+    printf("\n%s\n", "1 - Cette fonction ajoute un élément dans une liste qu'il soit le premier de celle ci ou non");
+    list ma_liste = NULL;
+    printf("\n%s\n", "2 - Cette fonction retourne 1 si la liste est vide et 0 si elle n'est pas vide");
+    printf("\nMa liste est vide : %s\n", estVide(ma_liste)? "OUI": "NON");
+    printf("\n%s\n", "3 - Cette fonction affiche tous les élement de la liste les un à la suite des autres");
+    ma_liste = push(ma_liste, "va");
+    ma_liste = push(ma_liste, "ça");
+    ma_liste = push(ma_liste, "comment");
+    ma_liste = push(ma_liste, "hello");
+    afficherListe(ma_liste, "%s");
+    printf("\n%s\n", "4 - Cette fonction compte le nombre d'élément d'une liste");
+    puts("");
+}
+
+list car(list nouvelElement, void * valeur) {
+    nouvelElement->car = valeur;
+    return nouvelElement;
+}
+
+list cdr(list nouvelElement, list L) {
+    nouvelElement->cdr = L;
+    return nouvelElement;
+}
+
+list push(list L, void * valeur) {
+    /* On crée un nouvel élément */
+    list nouvelElement = malloc(sizeof(element));
+    /* On assigne la valeur au nouvel élément */
+    nouvelElement = car(nouvelElement, valeur);
+    /* On assigne l'adresse de l'élément suivant au nouvel élément */
+    nouvelElement = cdr(nouvelElement, L);
+    /* On retourne la nouvelle liste, i.e. le pointeur sur le premier élément */
+    return nouvelElement;
+}
+
+int estVide(list L) {
+    return (L == NULL)? 1 : 0;
+}
+
+void afficherListe(list L, string format) {
+    element * P = L;
+    /* Tant que l'on n'est pas au bout de la liste */
+    while(estVide(P) == 0) {
+        /* On affiche */
+        printf(format, P->car);
+        /* On avance d'une case */
+        P = P->cdr;
+    }
+}
+
 void usage(const string D) {
     printf("Erreur en provenance de : %s\n", D);
     exit(1) ;
 }
+
+
+
