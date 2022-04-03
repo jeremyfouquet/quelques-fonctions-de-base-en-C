@@ -43,6 +43,7 @@ void positionCaractere(const string) ; // prototype
 string my_strchr(char C, string S) ;  // prototype
 void fonctionsDesListes(const string); // prototype
 void afficherListe(list, string); // prototype
+int compteList(list L); // prototype
 
 
 int main(int argc, const char * argv[]) {
@@ -237,6 +238,7 @@ void fonctionsDesListes(const string titre) {
     ma_liste = push(ma_liste, "hello");
     afficherListe(ma_liste, "%s");
     printf("\n%s\n", "4 - Cette fonction compte le nombre d'élément d'une liste");
+    printf("\nIl y a %d elements dans la liste\n", compteList(ma_liste));
     puts("");
 }
 
@@ -274,6 +276,12 @@ void afficherListe(list L, string format) {
         /* On avance d'une case */
         P = P->cdr;
     }
+}
+
+int compteList(list L) {
+    if (estVide(L) == 0) return 1 + compteList(L->cdr) ;
+    return 0 ;
+    
 }
 
 void usage(const string D) {
