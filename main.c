@@ -8,7 +8,7 @@
 typedef struct Doublet element;
 struct Doublet
 {
-    void * car;
+    int car;
     struct Doublet * cdr;
 };
 
@@ -20,9 +20,10 @@ typedef element * list;
 
 #define string char *
 
-element * car(element *, void *);
+element * car(element *, int);
 element * cdr(element *, list);
-list push(list, void *);
+list push(list, int);
+list copieElement(list);
 int estVide(list L);
 void usage(const string); // prototype
 void compte(const string); // prototype
@@ -42,9 +43,10 @@ int my_strstrs(const string S1, const string S2) ;
 void positionCaractere(const string) ; // prototype
 string my_strchr(char C, string S) ;  // prototype
 void fonctionsDesListes(const string); // prototype
-void afficherListe(list, string); // prototype
-int compteList(list L); // prototype
-list copylist(list L); // prototype
+void afficherListe(list); // prototype
+int compteList(list); // prototype
+//list copylist(list L); // prototype
+//list garde_superieurs(int, list); // prototype
 
 
 int main(int argc, const char * argv[]) {
@@ -233,20 +235,43 @@ void fonctionsDesListes(const string titre) {
     printf("\n%s\n", "2 - Cette fonction retourne 1 si la liste est vide et 0 si elle n'est pas vide");
     printf("\nMa liste est vide : %s\n", estVide(ma_liste)? "OUI": "NON");
     printf("\n%s\n", "3 - Cette fonction affiche tous les élement de la liste les un à la suite des autres");
-    ma_liste = push(ma_liste, "va");
-    ma_liste = push(ma_liste, "ça");
-    ma_liste = push(ma_liste, "comment");
-    ma_liste = push(ma_liste, "hello");
-    afficherListe(ma_liste, "%s");
+    ma_liste = push(ma_liste, 500);
+    ma_liste = push(ma_liste, 400);
+    ma_liste = push(ma_liste, 300);
+    ma_liste = push(ma_liste, 200);
+    afficherListe(ma_liste);
+    puts("");
     printf("\n%s\n", "4 - Cette fonction compte le nombre d'élément d'une liste");
     printf("\nIl y a %d elements dans la liste\n", compteList(ma_liste));
-    printf("\n%s\n", "5 - Cette fonction copie une liste dans une autre liste");
-    list ma_liste_copie = copylist(ma_liste);
-    compteList(ma_liste_copie);
+    printf("\n%s\n", "5 - Cette fonction copie le premier element de la liste dans un autre nouvelle element");
+    list A = copieElement(ma_liste);
+    list B = NULL;
+    B = push(B, 100);
+    printf("%i\n", A->car);
+    A = B;
+    printf("%i\n", A->car);
+    printf("%i\n", B->car);
+    puts("");
+    afficherListe(ma_liste);
+//    puts("");
+//    printf("\n%s\n", "6 - Cette fonction modifie directement une liste de nombres en ne gardant que ceux qui sont supérieurs à N");
+//    list ma_liste_nb = NULL;
+//    ma_liste_nb = push(ma_liste_nb, 10);
+//    ma_liste_nb = push(ma_liste_nb, 20);
+//    ma_liste_nb = push(ma_liste_nb, 30);
+//    ma_liste_nb = garde_superieurs(5, ma_liste_nb);
     puts("");
 }
 
-list car(list nouvelElement, void * valeur) {
+//list garde_superieurs(int N, list L) {
+//    if (estVide(L) == 0) {
+//        if ( L->car > N) return L->cdr = garde_superieurs(N, L->cdr) ;
+//        return garde_superieurs(N, L->cdr) ;
+//    }
+//    return NULL ;
+//}
+
+list car(list nouvelElement, int valeur) {
     nouvelElement->car = valeur;
     return nouvelElement;
 }
@@ -256,7 +281,7 @@ list cdr(list nouvelElement, list L) {
     return nouvelElement;
 }
 
-list push(list L, void * valeur) {
+list push(list L, int valeur) {
     /* On crée un nouvel élément */
     list nouvelElement = malloc(sizeof(element));
     /* On assigne la valeur au nouvel élément */
@@ -271,12 +296,12 @@ int estVide(list L) {
     return (L == NULL)? 1 : 0;
 }
 
-void afficherListe(list L, string format) {
+void afficherListe(list L) {
     element * P = L;
     /* Tant que l'on n'est pas au bout de la liste */
     while(estVide(P) == 0) {
         /* On affiche */
-        printf(format, P->car);
+        printf("%i\n", P->car);
         /* On avance d'une case */
         P = P->cdr;
     }
@@ -288,9 +313,16 @@ int compteList(list L) {
     
 }
 
-list copylist(list L) {
-    return (estVide(L)==0) ? push(L->car, copylist(L->cdr)) : NULL ;
+list copieElement(list L) {
+    list nouvelElement = malloc(sizeof(element));
+    nouvelElement->car = L->car;
+    nouvelElement->cdr = L->cdr;
+    return nouvelElement;
 }
+
+//list copylist(list L) {
+//    return (estVide(L)==0) ? push(L->car, copylist(L->cdr)) : NULL ;
+//}
 
 void usage(const string D) {
     printf("Erreur en provenance de : %s\n", D);
