@@ -44,6 +44,7 @@ string my_strchr(char C, string S) ;  // prototype
 void fonctionsDesListes(const string); // prototype
 void afficherListe(list, string); // prototype
 int compteList(list L); // prototype
+list copylist(list L); // prototype
 
 
 int main(int argc, const char * argv[]) {
@@ -239,6 +240,9 @@ void fonctionsDesListes(const string titre) {
     afficherListe(ma_liste, "%s");
     printf("\n%s\n", "4 - Cette fonction compte le nombre d'élément d'une liste");
     printf("\nIl y a %d elements dans la liste\n", compteList(ma_liste));
+    printf("\n%s\n", "5 - Cette fonction copie une liste dans une autre liste");
+    list ma_liste_copie = copylist(ma_liste);
+    compteList(ma_liste_copie);
     puts("");
 }
 
@@ -282,6 +286,10 @@ int compteList(list L) {
     if (estVide(L) == 0) return 1 + compteList(L->cdr) ;
     return 0 ;
     
+}
+
+list copylist(list L) {
+    return (estVide(L)==0) ? push(L->car, copylist(L->cdr)) : NULL ;
 }
 
 void usage(const string D) {
