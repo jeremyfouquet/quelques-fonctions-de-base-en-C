@@ -1,9 +1,13 @@
-//
-//  main.c
-//  fonctions de base
-//
-//  Created by Jeremy Fouquet on 01/04/2022.
-//
+/*
+   # *******************************************************
+   # Nom ......... : main.c
+   # Rôle ........ : Quelques fonctions de base en C
+   # Auteur ...... : Jeremy Fouquet
+   # Version ..... : V1 2022
+   # Compilation :  gcc main.c
+   # Execution : ./a.out
+   # *******************************************************
+*/
 
 typedef struct Doublet element;
 struct Doublet
@@ -70,7 +74,7 @@ void compte(const string titre) {
     //    ((not L) 0)
     //    ((+ 1 (compte (cdr L)))) ) )
     printf("\n%s\n", titre);
-    printf("\n%s\n", "Compter le nombre de caractères d’une chaîne (terminée par le caractère '\\0')");
+    printf("\n%s\n", "Compte le nombre de caractères d’une chaîne (terminée par le caractère '\\0')");
     puts("");
     string S = "Hello Hello";
     int nb1 = fonctionCompte1(S);
@@ -92,7 +96,7 @@ int fonctionCompte2(string S) {
 
 void parcour(const string titre) {
     printf("\n%s\n", titre);
-    printf("\n%s\n", "action de simple parcours en imprimant un ”+” par exemple à chaque caractère parcouru");
+    printf("\n%s\n", "Parcours une chaine en imprimant un ”+” par exemple à chaque caractère parcouru");
     puts("");
     string S = "Hello Hello";
     fonctionParcour(S);
@@ -114,7 +118,7 @@ void egaux(const string titre) {
     //    ((eq (car L) A) (+ 1 (compte-eq (cdr L) A)))
     //    ((compte-eq (cdr L) A)) ) )
     printf("\n%s\n", titre);
-    printf("\n%s\n", "compte le nombre de caractères égaux à son deuxième argument ");
+    printf("\n%s\n", "Compte le nombre de répétition d'un caractère dans une chaine");
     puts("");
     string S = "Hello Hello";
     char c = 'e';
@@ -131,7 +135,7 @@ int fonctionEgaux(string S, char C) {
 
 void copieChaine(const string titre) {
     printf("\n%s\n", titre);
-    printf("\n%s\n", "fonction qui copie une chaîne");
+    printf("\n%s\n", "Copie une chaîne");
     puts("");
     string S = "Hello Hello";
     string SCopie = malloc((sizeof(S)) + 1) ;
@@ -142,7 +146,7 @@ void copieChaine(const string titre) {
 
 void compareChaines(const string titre) {
     printf("\n%s\n", titre);
-    printf("\n%s\n", "Cette fonction renvoie un nombre qui est négatif si la première chaîne est inférieure à la deuxième, zéro si elles sont égales, positif si la première chaîne est plus grande que la deuxième ; une chaîne est plus grande qu’une autre si soit le premier caractère différent est plus grand (en code ascii) ou si elle est plus longue : abc est plus grand que abbbe, et abcd est plus grand que ab.");
+    printf("\n%s\n", "Renvoie un nombre qui est négatif si la première chaîne est inférieure à la deuxième, positif si la première chaîne est plus grande que la deuxième ou zéro si elles sont égales ; une chaîne est plus grande qu’une autre si soit le premier caractère différent est plus grand (en code ascii) ou si elle est plus longue : abc est plus grand que abbbe, et abcd est plus grand que ab.");
     puts("");
     string S1;
     string S2;
@@ -178,7 +182,7 @@ int my_strcmp(const string S1, const string S2){
 void contient(const string titre) {
     //https://koor.fr/C/cstring/strstr.wp
     printf("\n%s\n", titre);
-    printf("\n%s\n", "Si la sous-chaîne est trouvée dans la chaîne principale, la fonction renvoi un pointeur visant sa première occurrence. Dans le cas contraire, un pointeur nul (NULL) vous sera renvoyé.");
+    printf("\n%s\n", "Renvoi un pointeur visant sa première occurrence, si la sous-chaîne est trouvée dans la chaîne principale. Dans le cas contraire, un pointeur nul (NULL) est renvoyé.");
     string Source = "abbbe";
     string SousChaine = "abc";
     printf("\nRecherche %s dans %s\n", SousChaine, Source);
@@ -191,7 +195,7 @@ void contient(const string titre) {
 
 void occurence(const string titre) {
     printf("\n%s\n", titre);
-    printf("\n%s\n", "Cette fonction renvoie le nombre de fois où la sous chaine à été trouvé dans la chaine source");
+    printf("\n%s\n", "Renvoie le nombre de fois où la sous chaine à été trouvé dans la chaine source");
     string Source = "abbbe";
     string SousChaine = "abc";
     printf("\nIl y a %d occurence(s) de %s dans %s\n", my_strstrs(Source, SousChaine), SousChaine, Source);
@@ -212,7 +216,7 @@ int my_strstrs(const string Source, const string SousChaine) {
 
 void positionCaractere(const string titre) {
     printf("\n%s\n", titre);
-    printf("\n%s\n", "Cette fonction renvoie le pointeur sur le caractère dans la chaîne, ou NULL si celui ci n'existe pas dans la chaine.");
+    printf("\n%s\n", "Renvoie le pointeur sur le caractère dans la chaîne, ou NULL si celui ci n'existe pas dans la chaine.");
     char C = 'a';
     string S = "bads";
     printf("\nLa position de %c dans %s est %s\n", C, S, my_strchr(C, S));
@@ -230,20 +234,20 @@ string my_strchr(char C, string S) {
 
 void fonctionsDesListes(const string titre) {
     printf("\n%s\n", titre);
-    printf("\n%s\n", "1 - Cette fonction ajoute un élément dans une liste qu'il soit le premier de celle ci ou non");
+    printf("\n%s\n", "1 - Ajoute un élément dans une liste qu'il soit le premier de celle ci ou non");
     list ma_liste = NULL;
-    printf("\n%s\n", "2 - Cette fonction retourne 1 si la liste est vide et 0 si elle n'est pas vide");
+    printf("\n%s\n", "2 - Retourne 1 si la liste est vide et 0 si elle n'est pas vide");
     printf("\nMa liste est vide : %s\n", estVide(ma_liste)? "OUI": "NON");
-    printf("\n%s\n", "3 - Cette fonction affiche tous les élement de la liste les un à la suite des autres");
+    printf("\n%s\n", "3 - Affiche tous les élement de la liste les un à la suite des autres");
     ma_liste = push(ma_liste, 500);
     ma_liste = push(ma_liste, 400);
     ma_liste = push(ma_liste, 300);
     ma_liste = push(ma_liste, 200);
     afficherListe(ma_liste);
     puts("");
-    printf("\n%s\n", "4 - Cette fonction compte le nombre d'élément d'une liste");
+    printf("\n%s\n", "4 - Compte le nombre d'élément d'une liste");
     printf("\nIl y a %d elements dans la liste\n", compteList(ma_liste));
-    printf("\n%s\n", "5 - Cette fonction copie le premier element de la liste dans un autre nouvelle element");
+    printf("\n%s\n", "5 - Copie le premier element de la liste dans un nouvel element");
     list A = copieElement(ma_liste);
     list B = NULL;
     B = push(B, 100);
@@ -328,6 +332,3 @@ void usage(const string D) {
     printf("Erreur en provenance de : %s\n", D);
     exit(1) ;
 }
-
-
-
